@@ -7,7 +7,7 @@
 
 ## What this POC does:
 
-- [Build](./Dockerfile) and [Deploy](./kube) a ubuntu based container with a gui, and some dev tools in it
+- [Build](./Dockerfile) and [Deploy](./kube) an ubuntu based container with a gui, and some dev tools in it
 - Target infra is [minikube](https://github.com/kubernetes/minikube) for demo
 - Provides a http endpoint for the desktop, that can be accessed in a browser
 - Sidecar [docker-in-docker](https://www.docker.com/blog/docker-can-now-run-within-docker/) so the dev can do docker builds/runs and such in their machine, perhaps even deploy [KIND](https://github.com/kubernetes-sigs/kind) and then maybe deploy this VDI in that, and cause the universe to explode with the levels of inception 🤯 - I didn't try that.
