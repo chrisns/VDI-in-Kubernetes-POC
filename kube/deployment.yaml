@@ -15,9 +15,6 @@ spec:
       containers:
         - image: docker:dind
           name: dind
-          volumeMounts:
-            - mountPath: /var/run
-              name: run
           securityContext:
             privileged: true
           env:
@@ -47,8 +44,6 @@ spec:
           volumeMounts:
             - mountPath: /dev/shm
               name: shm
-            - mountPath: /var/run
-              name: run
           livenessProbe:
             httpGet:
               path: /
@@ -66,5 +61,3 @@ spec:
         - name: shm
           emptyDir:
             medium: Memory
-        - name: run
-          emptyDir:
