@@ -1,0 +1,14 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mydesktop
+
+spec:
+  rules:
+    - host: mydesktop.MINIKUBE_IP.xip.io
+      http:
+        paths:
+          - backend:
+              serviceName: mydesktop
+              servicePort: http

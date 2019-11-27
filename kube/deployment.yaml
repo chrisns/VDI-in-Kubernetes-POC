@@ -1,0 +1,70 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mydesktop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mydesktop
+  template:
+    metadata:
+      labels:
+        name: mydesktop
+    spec:
+      containers:
+        - image: docker:dind
+          name: dind
+          volumeMounts:
+            - mountPath: /var/run
+              name: run
+          securityContext:
+            privileged: true
+          env:
+            - name: DOCKER_TLS_CERTDIR
+              value: ""
+          ports:
+            - name: dind
+              containerPort: 2375
+          resources:
+            limits:
+              memory: 1024Mi
+              cpu: 0.5
+        - image: chrisns/my-desktop:build
+          name: mydesktop
+          resources:
+            limits:
+              memory: 1024Mi
+              cpu: 0.5
+          env:
+            - name: DOCKER_HOST
+              value: localhost:2375
+          ports:
+            - name: http
+              containerPort: 6080
+            - name: vnc
+              containerPort: 5900
+          volumeMounts:
+            - mountPath: /dev/shm
+              name: shm
+            - mountPath: /var/run
+              name: run
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 1
+            initialDelaySeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 1
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 1
+      volumes:
+        - name: shm
+          emptyDir:
+            medium: Memory
+        - name: run
+          emptyDir:
