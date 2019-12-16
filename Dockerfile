@@ -1,12 +1,6 @@
 FROM x11vnc/desktop
 WORKDIR /opt
 
-ARG INTELJ_VERSION=2019.2.4
-ARG INTELJ_VERSION_INTERNAL=192.7142.36
-
-RUN curl -s https://download-cf.jetbrains.com/idea/ideaIC-${INTELJ_VERSION}.tar.gz | tar -xz -C /opt \
-  && mv /opt/idea-IC-${INTELJ_VERSION_INTERNAL} /opt/idea
-
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 RUN apt-get update
