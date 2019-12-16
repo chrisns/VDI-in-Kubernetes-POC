@@ -22,7 +22,7 @@ jobs:
         run: docker login  -u $docker_username -p ${docker_password}
 
       - name: Tag
-        run: docker tag chrisns/vdi:latestchrisns/vdi:${GITHUB_SHA}
+        run: docker tag chrisns/vdi:latest chrisns/vdi:${GITHUB_SHA}
 
       - name: Push latest
         if: github.ref == 'refs/heads/master'
