@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 minikube start --memory=8192 --addons=ingress --cpus=4
 
