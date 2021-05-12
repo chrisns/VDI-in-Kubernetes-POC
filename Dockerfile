@@ -1,4 +1,4 @@
-FROM x11vnc/desktop
+FROM x11vnc/desktop:20.04
 WORKDIR /opt
 
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
